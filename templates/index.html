@@ -94,13 +94,19 @@
         const error = document.getElementById("server-error");
 
         if (error) {
-          Swal.fire({
-            icon: "error",
-            title: "No se pudo analizar",
-            text: error.dataset.message,
-            confirmButtonText: "Entendido",
-            confirmButtonColor: "#0d6efd"
-          });
+          if (window.Swal) {
+            Swal.fire({
+              icon: "error",
+              title: "No se pudo analizar",
+              text: error.dataset.message,
+              confirmButtonText: "Entendido",
+              confirmButtonColor: "#0d6efd"
+            });
+          } else {
+            error.className = "alert alert-danger";
+            error.setAttribute("role", "alert");
+            error.textContent = error.dataset.message;
+          }
         }
       });
     </script>

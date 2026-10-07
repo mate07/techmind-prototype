@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {"title":"TechMind Runtime Architecture","locale":"en","output":".archify/architecture-runtime-20261005-130015/runtime.html","quality_profile":"showcase","repository":{"url":"https://github.com/mate07/techmind-prototype.git","revision":"159a96024d4890c74b9c88da1debf804ffb4d6af"}},
+  "components": [
+    {"id":"browser","type":"frontend","label":"Browser UI","sublabel":"Title + technical content","pos":[40,80],"size":[200,80],"sources":[{"path":"templates/index.html","line":50,"end_line":80},{"path":"templates/resultado.html","line":35,"end_line":69}]},
+    {"id":"http","type":"backend","label":"Flask Routes","sublabel":"Validate input; HTML or JSON","pos":[450,80],"size":[220,80],"sources":[{"path":"app.py","line":20,"end_line":45}]},
+    {"id":"client","type":"external","label":"API Client","sublabel":"POST /api/contenido","pos":[880,80],"size":[200,80],"sources":[{"path":"app.py","line":34,"end_line":41}]},
+    {"id":"cdn","type":"cloud","label":"jsDelivr CDN","sublabel":"Bootstrap CSS + SweetAlert2","pos":[40,360],"size":[200,80],"sources":[{"path":"templates/index.html","line":9,"end_line":15},{"path":"templates/index.html","line":91,"end_line":105}]},
+    {"id":"analysis","type":"backend","label":"Content Analysis","sublabel":"Classification + top 5 keywords","pos":[450,360],"size":[220,80],"sources":[{"path":"app.py","line":3,"end_line":17},{"path":"services/classifier.py","line":25,"end_line":46},{"path":"services/keywords.py","line":11,"end_line":22}]},
+    {"id":"artifacts","type":"database","label":"Local Model Files","sublabel":"models/*.joblib (optional)","pos":[880,360],"size":[200,80],"sources":[{"path":"services/classifier.py","line":7,"end_line":9},{"path":"services/classifier.py","line":25,"end_line":27},{"path":"train_model.py","line":26,"end_line":43}]}
+  ],
+  "boundaries":[{"kind":"region","label":"Single Python / Flask process","wraps":["http","analysis"],"pad":25}],
+  "connections":[
+    {"id":"form","from":"browser","to":"http","label":"GET /; POST /analizar","variant":"emphasis"},
+    {"id":"api","from":"client","to":"http","label":"JSON request"},
+    {"id":"analyze","from":"http","to":"analysis","label":"analyze_content()","variant":"emphasis"},
+    {"id":"assets","from":"browser","to":"cdn","label":"HTTPS assets","variant":"dashed"},
+    {"id":"load","from":"analysis","to":"artifacts","label":"Load at startup if present","variant":"dashed"}
+  ],
+  "cards":[
+    {"dot":"cyan","title":"Request and response","items":["Both routes require a title or text; empty input returns HTTP 400.","Synchronous analysis returns category, confidence and keywords.","Form requests render Jinja HTML; the API returns JSON."]},
+    {"dot":"emerald","title":"Artifact-dependent behavior","items":["Both artifacts loaded: TF-IDF + logistic regression prediction.","Either missing: local rules with heuristic confidence.","Keywords use the vectorizer when loaded; otherwise word frequency."]},
+    {"dot":"amber","title":"Runtime scope","items":["train_model.py writes both joblib files offline, outside requests.","No database or request persistence; model objects stay in memory.","python app.py starts Flask in debug mode; no production host configured."]}
+  ]
+}

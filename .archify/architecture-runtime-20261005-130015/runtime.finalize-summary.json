@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\candidate.json",
+    "sha256": "89364fb86bdb9ae61ef4615e2b6c2695ef026b117a566ea645333952f32bd80f",
+    "bytes": 3284
+  },
+  "artifact": {
+    "path": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\runtime.html",
+    "sha256": "deddd632e7c1081746f3ab25f646c44a9ff9c0e538b1fe6cb80c31f7302909ea",
+    "bytes": 757591
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\runtime.finalize.json",
+    "summaryReceipt": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\runtime.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\runtime.browser-check.json"
+  },
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "timeout"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 21273
+}

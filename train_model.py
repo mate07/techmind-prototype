@@ -15,7 +15,7 @@ DATA_PATH = ROOT / "data" / "arxiv_cs_clean.csv"
 MODEL_DIR = ROOT / "models"
 
 
-def train(data_path: str | Path = DATA_PATH) -> dict:
+def train(data_path: str | Path = DATA_PATH, model_dir: str | Path = MODEL_DIR) -> dict:
     frame = pd.read_csv(data_path).dropna(subset=["titulo", "texto", "categoria"])
     if frame["categoria"].nunique() < 2:
         raise ValueError("Se necesitan al menos dos categorías para entrenar el modelo")
@@ -38,9 +38,10 @@ def train(data_path: str | Path = DATA_PATH) -> dict:
         "confusion_matrix": confusion_matrix(y_test, predictions).tolist(),
     }
     print(classification_report(y_test, predictions, zero_division=0))
-    MODEL_DIR.mkdir(exist_ok=True)
-    joblib.dump(model, MODEL_DIR / "modelo.joblib")
-    joblib.dump(vectorizer, MODEL_DIR / "vectorizador.joblib")
+    output_dir = Path(model_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, output_dir / "modelo.joblib")
+    joblib.dump(vectorizer, output_dir / "vectorizador.joblib")
     return metrics
 
 

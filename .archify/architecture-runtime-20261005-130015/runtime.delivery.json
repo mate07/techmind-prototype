@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b143a0bf-8f3c-49f1-8d35-7d8fb1adf293",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\candidate.json",
+  "output": "C:\\Users\\Usuario\\Desktop\\Proyectos\\Proyectos Python\\techmind-prototype\\.archify\\architecture-runtime-20261005-130015\\runtime.html",
+  "specification": {
+    "sha256": "89364fb86bdb9ae61ef4615e2b6c2695ef026b117a566ea645333952f32bd80f",
+    "bytes": 3284
+  },
+  "artifact": {
+    "sha256": "deddd632e7c1081746f3ab25f646c44a9ff9c0e538b1fe6cb80c31f7302909ea",
+    "bytes": 757591
+  }
+}

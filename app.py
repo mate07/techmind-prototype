@@ -34,8 +34,14 @@ def analyze_form():
 @app.post("/api/contenido")
 def analyze_api():
     payload = request.get_json(silent=True) or {}
-    title = str(payload.get("titulo", "")).strip()
-    text = str(payload.get("texto", "")).strip()
+    if not isinstance(payload, dict):
+        return jsonify({"error": "El cuerpo JSON debe ser un objeto."}), 400
+    raw_title = payload.get("titulo", "")
+    raw_text = payload.get("texto", "")
+    if not isinstance(raw_title, str) or not isinstance(raw_text, str):
+        return jsonify({"error": "Los campos 'titulo' y 'texto' deben ser texto."}), 400
+    title = raw_title.strip()
+    text = raw_text.strip()
     if not title and not text:
         return jsonify({"error": "Los campos 'titulo' o 'texto' son requeridos."}), 400
     return jsonify(analyze_content(title, text))

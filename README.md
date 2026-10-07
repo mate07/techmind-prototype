@@ -70,7 +70,22 @@ La respuesta contiene `categoria`, `probabilidad` y `palabras_clave`.
 ## Pruebas
 
 ```bash
-python -m unittest discover -s tests -v
+pip install -r requirements-dev.txt
+playwright install chromium
+
+# Suite rápida
+pytest -m "not model and not e2e"
+
+# Preparación, entrenamiento y calidad estadística
+pytest -m model
+
+# Flask + Chromium headless
+pytest -m e2e
+
+# Validación integral
+pytest
 ```
 
-Casos previstos: inteligencia artificial, desarrollo de software y ciberseguridad. La versión 0.1 no incluye autenticación, base de datos, Docker, OCI, recomendaciones ni búsqueda semántica.
+Las pruebas escriben datasets, reportes y modelos únicamente en directorios temporales. La suite `model` utiliza `data/arxiv_cs_clean.csv` cuando está disponible y compara sus métricas con `tests/model_baseline.json`; el archivo original `data/arxiv.csv` no es obligatorio.
+
+La versión 0.1 no incluye autenticación, base de datos, Docker, OCI, recomendaciones ni búsqueda semántica.

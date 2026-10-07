@@ -1,0 +1,9 @@
+# Nmap 7.991 scan initiated Mon Oct  5 13:08:10 2026 as: "C:\\Program Files (x86)\\Nmap\\nmap.exe" -sV -p 5000 -oN resultado_nmap.txt 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0020s latency).
+
+PORT     STATE SERVICE VERSION
+5000/tcp open  http    Werkzeug httpd 3.1.8 (Python 3.13.5)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Oct  5 13:08:17 2026 -- 1 IP address (1 host up) scanned in 7.33 seconds

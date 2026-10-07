@@ -28,7 +28,12 @@ CATEGORY_MAP = {
 }
 
 
-def prepare(source: str | Path = DEFAULT_SOURCE, output: str | Path = DEFAULT_OUTPUT, per_category: int = 2500) -> pd.DataFrame:
+def prepare(
+    source: str | Path = DEFAULT_SOURCE,
+    output: str | Path = DEFAULT_OUTPUT,
+    per_category: int = 2500,
+    report_path: str | Path | None = None,
+) -> pd.DataFrame:
     frame = pd.read_csv(source)
     required = {"title", "abstract", "primary_category"}
     missing = sorted(required.difference(frame.columns))
@@ -64,7 +69,7 @@ def prepare(source: str | Path = DEFAULT_SOURCE, output: str | Path = DEFAULT_OU
         "category_counts": {str(key): int(value) for key, value in clean["categoria"].value_counts().items()},
         "excluded_categories": {str(key): int(value) for key, value in excluded.items()},
     }
-    report_path = ROOT / "reports" / "eda" / "preparation_summary.json"
+    report_path = Path(report_path) if report_path is not None else ROOT / "reports" / "eda" / "preparation_summary.json"
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Registros guardados: {len(clean)} en {output_path}")
